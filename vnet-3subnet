@@ -1,0 +1,50 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "resources": [
+        {
+            "type": "Microsoft.Network/virtualNetworks",
+            "apiVersion": "2020-11-01",
+            "name": "hippo",
+            "location": "East US",
+            "tags": {
+                "env": "Dev",
+                "Client": "hippo"
+            },
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": ["192.168.0.0/24"]
+                },
+                "subnets": [
+                    {
+                        "name": "HSN1",
+                        "type": "Microsoft.Network/virtualNetworks/subnets",
+                        "properties": {
+                            "addressPrefix": "192.168.0.0/28"
+
+                        }
+                    },
+                    {
+                        "name": "HSN2",
+                        "type": "Microsoft.Network/virtualNetworks/subnets",
+                        "properties": "192.168.0.16/28"
+
+                    },
+                    {
+                        "name": "HSN3",
+                        "type": "Microsoft.Network/virtualNetworks/subnets",
+                        "properties": {
+                            "addressPrefix": "192.168.0.32/28"
+
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
+
+
+
+
+https://learn.microsoft.com/en-us/azure/templates/microsoft.network/virtualnetworks/subnets?pivots=deployment-language-arm-template#subnetpropertiesformat-1
