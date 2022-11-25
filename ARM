@@ -1,0 +1,43 @@
+ARM Templates
+While creating ARM Templates the JSON structure is defined by Azure
+The template syntax/structure 
+https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/syntax
+
+Template format
+In its simplest structure, a template has the following elements:
+
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "",
+  "apiProfile": "",
+  "parameters": {  },
+  "variables": {  },
+  "functions": [  ],
+  "resources": [  ],
+  "outputs": {  }
+}
+
+Minimal ARM template (only required values)
+{
+    "$schema": "",
+    "contentVersion": "",
+    "resources": []
+}
+
+ARM Template Deployments: When we create a template and want to deploy, there are diferent levels of deployment
+Subscription Level => 
+Resource Group => 
+Management Group => 
+tenant => 
+
+# understanding resources 
+
+Resource structure:
+{
+    "type": "",
+    "apiVersion": "",
+    "properties": {
+
+    },
+    "arguments": ""
+}
