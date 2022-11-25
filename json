@@ -1,0 +1,20 @@
+json is data represenation language, used in data transport/representation between client and servers. 
+It is also used for configuration purposes.
+It is collection of name value pairs. There are three categories of data
+   *simple/scalar
+   *plural/list
+   *dictionary/object
+
+<key>: <value>
+       Simple/scalar => text (anythins in single cote or double cote)
+	   "chennai", "60093" 
+        number 1, 2.5, 100, 1000
+        boolean true false
+        plural/list => []
+		
+"address" : {
+    "No" : 3,
+	"street": "Nerkundram Patahi",
+	"area": "Vadapalani",
+	"pincode": 600026
+}
