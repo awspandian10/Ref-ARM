@@ -1,0 +1,110 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "resources": [
+        {
+            "type": "Microsoft.Network/virtualNetworks",
+            "apiVersion": "2020-11-01",
+            "name": "hippo",
+            "location": "East US",
+            "tags": {
+                "env": "Dev",
+                "Client": "hippo"
+            },
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": ["192.168.0.0/24"]
+                }
+            }
+                 
+        },
+        {
+            "type": "Microsoft.Network/virtualNetworks/subnets",
+            "apiVersion": "2020-11-01",
+            "name": "hippo/HSN1",
+            "properties": {
+                "addressPrefix": "192.168.0.0/28"
+            }
+
+        },
+                {
+            "type": "Microsoft.Network/virtualNetworks/subnets",
+            "apiVersion": "2020-11-01",
+            "name": "hippo/HSN2",
+            "properties": {
+                "addressPrefix": "192.168.0.16/28"
+            }
+
+        },
+                {
+            "type": "Microsoft.Network/virtualNetworks/subnets",
+            "apiVersion": "2020-11-01",
+            "name": "hippo/HSN3",
+            "properties": {
+                "addressPrefix": "192.168.0.32/28"
+            }
+
+        }
+    ]
+}
+
+https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/resource-dependency
+
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "resources": [
+        {
+            "type": "Microsoft.Network/virtualNetworks",
+            "apiVersion": "2020-11-01",
+            "name": "hippo",
+            "location": "East US",
+            "tags": {
+                "env": "Dev",
+                "Client": "hippo"
+            },
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": ["192.168.0.0/24"]
+                }
+            }                 
+        },
+        {
+            "type": "Microsoft.Network/virtualNetworks/subnets",
+            "apiVersion": "2020-11-01",
+            "name": "hippo/HSN1",
+            "properties": {
+                "addressPrefix": "192.168.0.0/28"
+            },
+		    "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', 'hippo')]"
+                
+        ]
+        },               
+           {
+            "type": "Microsoft.Network/virtualNetworks/subnets",
+            "apiVersion": "2020-11-01",
+            "name": "hippo/HSN2",
+            "properties": {
+                "addressPrefix": "192.168.0.16/28"
+            },
+		    "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', 'hippo')]",
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', 'hippo', 'HSN1')]"
+        ]
+        },  
+                {
+            "type": "Microsoft.Network/virtualNetworks/subnets",
+            "apiVersion": "2020-11-01",
+            "name": "hippo/HSN3",
+            "properties": {
+                "addressPrefix": "192.168.0.32/28"
+            },
+		    "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', 'hippo')]",
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', 'hippo', 'HSN2')]"
+        ]     
+
+        }
+    ]
+}
